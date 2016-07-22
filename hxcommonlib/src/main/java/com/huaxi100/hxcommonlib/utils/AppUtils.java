@@ -1,0 +1,78 @@
+package com.huaxi100.hxcommonlib.utils;
+
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Point;
+import android.view.WindowManager;
+
+/**
+ */
+public class AppUtils {
+    private static long lastClickTime;
+
+    public static boolean isClickAgain() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if (0 < timeD && timeD < 1500) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
+
+    /**
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static int getWidth(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Point size = new Point();
+        wm.getDefaultDisplay().getSize(size);
+        return size.x;
+    }
+
+    public static int px2sp(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static int sp2px(Context context, float spValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (spValue * scale + 0.5f);
+    }
+
+    public static int getHeight(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Point size = new Point();
+        wm.getDefaultDisplay().getSize(size);
+        return size.y;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static PackageInfo getPackageInfo(Context context) {
+        PackageInfo info = null;
+        try {
+            info = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace(System.err);
+        }
+        if (info == null)
+            info = new PackageInfo();
+        return info;
+    }
+}

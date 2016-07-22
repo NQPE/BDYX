@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="theme_background_color">#e0e0e0</color>
+
+    <color name="main_title_color">@color/color333</color>
+    <color name="main_tag_color">@color/color999</color>
+    <color name="main_liked_color">#ff6600</color>
+    <color name="main_img_bg">@color/colorccc</color>
+
+    <color name="detail_liked">#ff6666</color>
+    <color name="detail_unliked">@color/colorccc</color>
+    
+    <color name="color_white">@android:color/white</color>
+    <color name="color_black">@android:color/black</color>
+    <color name="color_light_gray">#F8F8F8</color>
+    <color name="color_button_blue">#4998e8</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="color333">#333333</color>
+    <color name="color999">#999999</color>
+    <color name="colorccc">#cccccc</color>
+    <color name="color666">#666666</color>
+
+    <color name="colorf0">#f06240</color>
+    <color name="color_orange">#ff4f00</color>
+    <color name="color_orange1">#FF5001</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="color_gray1">#888888</color>
+    <color name="color_gray_division">#EDEDED</color>
+
+
+    <color name="color_hint">#d0d0d0</color>
+    <color name="color_theme_green">#43b56b</color>
+    <color name="color_theme_background">#f7f7f7</color>
+    <color name="canlendar_text_color">@color/color_white</color>
+
+    <color name="color_primary">#3F51B5</color>
+    <color name="color_primary_dark">#303F9F</color>
+    <color name="color_accent">#448AFF</color>
+    <color name="color_divider">#eeeeee</color>
+    <color name="color_list_item_pressed">@color/color_primary</color>
+    <color name="color_list_item_normal">#fff</color>
+    <color name="color_list_Item_text_pressed">#fff</color>
+    <color name="color_list_Item_text_normal">#454545</color>
+    <color name="color_source">#a1ffffff</color>
+    <color name="normal_gray">#FFDFDFDF</color>
+    <color name="normal_green">#FF62CC74</color>
+    <color name="normal_red">#FFF96650</color>
+    <color name="normal_yellow">#FFFFCC00</color>
+</resources>
