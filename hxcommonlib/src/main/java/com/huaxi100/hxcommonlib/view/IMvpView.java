@@ -6,5 +6,5 @@ package com.huaxi100.hxcommonlib.view;
  * 对于业务需求的view需要继承该接口
  * Created by hx100 on 2016/5/12.
  */
-public interface MvpView {
+public interface IMvpView {
 }

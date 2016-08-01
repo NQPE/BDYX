@@ -3,6 +3,7 @@ package com.huaxi100.hxcommonlib.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.view.WindowManager;
 
@@ -59,6 +60,41 @@ public class AppUtils {
         return size.y;
     }
 
+    /**
+     * 获取文字的宽度
+     *
+     * @param paint
+     * @param str
+     * @return
+     */
+    public static int getTextWidth(Paint paint, String str) {
+        int iRet = 0;
+        if (str != null && str.length() > 0) {
+            int len = str.length();
+            float[] widths = new float[len];
+            paint.getTextWidths(str, widths);
+            for (int j = 0; j < len; j++) {
+                iRet += (int) Math.ceil(widths[j]);
+            }
+        }
+        return iRet;
+    }
+
+    /**
+     * 计算文字的高度
+     *
+     * @param paint
+     * @return
+     */
+    public static int getTextHeight(Paint paint) {
+        Paint.FontMetrics fm = paint.getFontMetrics();
+        return (int) Math.ceil(fm.descent - fm.ascent);
+    }
+
+    public static int getTextFullHeight(Paint paint) {
+        Paint.FontMetrics fm = paint.getFontMetrics();
+        return (int) Math.ceil(fm.bottom - fm.top);
+    }
     /**
      *
      * @return

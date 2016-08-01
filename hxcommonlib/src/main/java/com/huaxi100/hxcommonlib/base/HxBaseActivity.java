@@ -1,14 +1,22 @@
 package com.huaxi100.hxcommonlib.base;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.huaxi100.hxcommonlib.R;
 import com.huaxi100.hxcommonlib.app.AppManager;
+import com.huaxi100.hxcommonlib.utils.EventBusCenter;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.Serializable;
 
@@ -25,6 +33,10 @@ public abstract class HxBaseActivity extends RxAppCompatActivity {
      */
     protected static String TAG = null;
     protected HxBaseActivity activity;
+    /**
+     * 加载对话框
+     */
+    protected ProgressDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +58,32 @@ public abstract class HxBaseActivity extends RxAppCompatActivity {
         doBusiness();
     }
 
+    public void showDialog() {
+        if (activity == null) {
+            return;
+        }
+        if (loadingDialog == null) {
+            loadingDialog = new ProgressDialog(activity,R.style.LoadingDialog);
+            loadingDialog.setCanceledOnTouchOutside(false);
+        }
+        loadingDialog.show();
+        View dialogView = makeView(R.layout.view_loading);
+//        ImageView imageView = (ImageView) dialogView.findViewById(R.id.rotate_image);
+//        imageView.setImageResource(R.drawable.loading_ani);
+//        AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getDrawable();
+//        animationDrawable.start();
+        loadingDialog.setContentView(dialogView);
+    }
 
+    public void dismissDialog() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
+    }
+    public View makeView(int resId) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        return inflater.inflate(resId, null);
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -58,7 +95,7 @@ public abstract class HxBaseActivity extends RxAppCompatActivity {
     }
 
     public void toast(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -94,6 +131,18 @@ public abstract class HxBaseActivity extends RxAppCompatActivity {
         startActivity(new Intent(action));
     }
 
+    @Subscribe
+    public void onEventMainThread(EventBusCenter eventBusCenter) {
+        if (null != eventBusCenter) {
+            onEventBusMainThread(eventBusCenter);
+        }
+    }
+    /**
+     * when event comming
+     *
+     * @param eventBusCenter
+     */
+    protected abstract void onEventBusMainThread(EventBusCenter eventBusCenter);
     /**
      * @param
      * @return void

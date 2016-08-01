@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.huaxi100.hxcommonlib.utils.EventBusCenter;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.lang.reflect.Field;
 
@@ -77,7 +79,18 @@ public abstract class HxBaseFragment extends RxFragment {
             EventBus.getDefault().unregister(this);
         }
     }
-
+    @Subscribe
+    public void onEventMainThread(EventBusCenter eventBusCenter) {
+        if (null != eventBusCenter) {
+            onEventBusMainThread(eventBusCenter);
+        }
+    }
+    /**
+     * when event comming
+     *
+     * @param eventBusCenter
+     */
+    protected abstract void onEventBusMainThread(EventBusCenter eventBusCenter);
     @Override
     public void onDetach() {
         super.onDetach();

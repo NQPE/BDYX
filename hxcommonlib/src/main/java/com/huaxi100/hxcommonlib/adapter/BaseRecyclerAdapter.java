@@ -57,9 +57,9 @@ public abstract class BaseRecyclerAdapter<E> extends RecyclerView.Adapter {
         this.resId = resId;
         this.rCls = rCls;
         this.holderClass = holderClass;
-        LayoutInflater inflater = (LayoutInflater) activity
-                .getSystemService(activity.LAYOUT_INFLATER_SERVICE);
-        iInitShowLoadMoreView=initFootView(footerView);
+//        LayoutInflater inflater = (LayoutInflater) activity
+//                .getSystemService(activity.LAYOUT_INFLATER_SERVICE);
+        iInitShowLoadMoreView=initFootView();
 //        this.footerView = inflater.inflate(R.layout.recycleview_footer, null, false);
 //        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        this.footerView.setLayoutParams(lp);
@@ -71,7 +71,11 @@ public abstract class BaseRecyclerAdapter<E> extends RecyclerView.Adapter {
         this.listener = listener;
     }
 
-    public abstract IShowLoadMoreView initFootView(View footerView);
+    public abstract IShowLoadMoreView initFootView();
+
+    protected void setInitFooterView(View footerView){
+        this.footerView=footerView;
+    }
 
     public void addHeader(View header) {
         this.headerView = header;
@@ -103,9 +107,13 @@ public abstract class BaseRecyclerAdapter<E> extends RecyclerView.Adapter {
         setCanLoadMore(false);
         setIsLoading(false);
         if (isCustomLoadMore) {
-            iShowLoadMoreView.showNotMoreData(footerView);
+            if (iShowLoadMoreView!=null){
+                iShowLoadMoreView.showNotMoreData(footerView);
+            }
         } else {
-            iInitShowLoadMoreView.showNotMoreData(footerView);
+            if (iInitShowLoadMoreView!=null){
+                iInitShowLoadMoreView.showNotMoreData(footerView);
+            }
         }
         notifyDataSetChanged();
     }
@@ -134,9 +142,13 @@ public abstract class BaseRecyclerAdapter<E> extends RecyclerView.Adapter {
         bottomCount = 1;
         setCanLoadMore(true);
         if (isCustomLoadMore) {
-            iShowLoadMoreView.showLoadMoreData(footerView);
+            if (iShowLoadMoreView!=null){
+                iShowLoadMoreView.showLoadMoreData(footerView);
+            }
         } else {
-            iInitShowLoadMoreView.showLoadMoreData(footerView);
+            if (iInitShowLoadMoreView!=null){
+                iInitShowLoadMoreView.showLoadMoreData(footerView);
+            }
         }
         notifyDataSetChanged();
     }

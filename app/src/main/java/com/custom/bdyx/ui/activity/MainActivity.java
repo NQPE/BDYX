@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         for (LinearLayout ll : ll_tabs) {
             ll.setOnClickListener(this);
         }
-//        vp_main.setOffscreenPageLimit(fragLsit.size());
+        vp_main.setOffscreenPageLimit(fragLsit.size());
         vp_main.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
 
             @Override

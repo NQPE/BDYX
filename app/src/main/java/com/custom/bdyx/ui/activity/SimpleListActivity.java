@@ -1,4 +1,4 @@
-package com.custom.bdyx.ui.fragment;
+package com.custom.bdyx.ui.activity;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.custom.bdyx.R;
+import com.custom.bdyx.ui.fragment.BaseFragment;
 import com.huaxi100.hxcommonlib.adapter.BaseRecyclerAdapter;
 import com.huaxi100.hxcommonlib.presenter.BasePresenter;
 
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by levi on 2016/7/22.
  */
-public abstract class SimpleListFragment<T> extends BaseFragment{
+public abstract class SimpleListActivity<T> extends BaseActivity{
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected RecyclerView recyclerView;
 
@@ -25,9 +26,9 @@ public abstract class SimpleListFragment<T> extends BaseFragment{
     protected BasePresenter presenter = null;
 
     @Override
-    public void doBusiness(View view) {
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_refresh);
-        recyclerView = (RecyclerView) view.findViewById(R.id.rl_list);
+    public void doBusiness() {
+        swipeRefreshLayout = (SwipeRefreshLayout) activity.findViewById(R.id.srl_refresh);
+        recyclerView = (RecyclerView) activity.findViewById(R.id.rl_list);
         init();
         initView();
     }
